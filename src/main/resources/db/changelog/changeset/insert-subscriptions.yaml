@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-sunscritpions
+      author: Anton Buzynnikov
+      changes:
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Netflix Premium"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Disney+"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "HBO Max"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Amazon Prime Video"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Apple TV+"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Spotify Premium"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "YouTube Premium"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Twitch Turbo"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Crunchyroll Mega Fan"
+        - insert:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: name
+                  value: "Deezer Family"
