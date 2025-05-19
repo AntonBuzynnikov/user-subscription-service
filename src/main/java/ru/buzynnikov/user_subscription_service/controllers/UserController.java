@@ -1,5 +1,6 @@
 package ru.buzynnikov.user_subscription_service.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -33,7 +34,7 @@ public class UserController {
      * @return успешный HTTP-ответ с новым объектом пользователя и ссылкой на созданный ресурс
      */
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request, UriComponentsBuilder uriBuilder) {
 
         UserResponse userResponse = userService.saveUser(request);
         URI location = uriBuilder.path("/api/v1/users/{id}").buildAndExpand(userResponse.id()).toUri();
@@ -60,7 +61,7 @@ public class UserController {
      * @return пустой успешный HTTP-ответ (HTTP статус 204 No Content)
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserRequest request) {
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequest request) {
         userService.updateUser(id, request);
         return ResponseEntity.noContent().build();
     }
@@ -85,7 +86,7 @@ public class UserController {
      * @return пустой успешный HTTP-ответ (HTTP статус 204 No Content)
      */
     @PostMapping("/{id}/subscriptions")
-    public ResponseEntity<Void> subscribeUser(@PathVariable Long id, @RequestBody SubscriptionRequest request) {
+    public ResponseEntity<Void> subscribeUser(@PathVariable Long id,@Valid @RequestBody SubscriptionRequest request) {
         userService.addSubscription(id, request);
         return ResponseEntity.noContent().build();
     }

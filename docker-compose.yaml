@@ -1,5 +1,21 @@
-services:
 
+networks:
+  app-db:
+    driver: bridge
+
+services:
+  app:
+    image: user-sub-service:1
+    ports:
+      - 8080:8080
+    networks:
+      - app-db
+    links:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/users_subscriptions_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
   db:
     image: postgres:16
     ports:
@@ -9,3 +25,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=users_subscriptions_db
+    networks:
+      - app-db

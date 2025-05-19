@@ -1,7 +1,10 @@
 package ru.buzynnikov.user_subscription_service.services;
 
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.buzynnikov.user_subscription_service.aspect.CreateLog;
+import ru.buzynnikov.user_subscription_service.aspect.UpdateLog;
 import ru.buzynnikov.user_subscription_service.dto.SubscriptionRequest;
 import ru.buzynnikov.user_subscription_service.dto.SubscriptionResponse;
 import ru.buzynnikov.user_subscription_service.dto.UserRequest;
@@ -23,6 +26,7 @@ public class UserServiceDefault implements UserService {
     private final UserRepository userRepository;
     private final SubscriptionService subscriptionService;
 
+
     public UserServiceDefault(UserRepository userRepository, SubscriptionService subscriptionService) {
         this.userRepository = userRepository;
         this.subscriptionService = subscriptionService;
@@ -36,6 +40,7 @@ public class UserServiceDefault implements UserService {
      */
     @Transactional
     @Override
+    @CreateLog
     public UserResponse saveUser(UserRequest request) {
         return createUserResponse(userRepository.save(createUser(request)));
     }
@@ -59,6 +64,7 @@ public class UserServiceDefault implements UserService {
      */
     @Transactional
     @Override
+    @UpdateLog
     public void updateUser(Long id, UserRequest request) {
         User user = getById(id);
         user.setUsername(request.name());
@@ -72,6 +78,7 @@ public class UserServiceDefault implements UserService {
      */
     @Transactional
     @Override
+    @UpdateLog
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
@@ -84,6 +91,7 @@ public class UserServiceDefault implements UserService {
      */
     @Transactional
     @Override
+    @UpdateLog
     public void addSubscription(Long userId, SubscriptionRequest request) {
         subscriptionService.existsSubscription(request.id());
         existsUser(userId);
@@ -109,6 +117,7 @@ public class UserServiceDefault implements UserService {
      */
     @Transactional
     @Override
+    @UpdateLog
     public void deleteSubscriptionFormUser(Long userId, Long subscriptionId) {
         userRepository.removeSubscriptionFromUser(userId, subscriptionId);
     }
@@ -140,7 +149,7 @@ public class UserServiceDefault implements UserService {
      * @throws UserNotFoundException если пользователь не найден
      */
     private User getById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Пользователь не найден"));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(String.format("Пользователь с id %d не найден", id)));
     }
 
     /**
@@ -150,7 +159,9 @@ public class UserServiceDefault implements UserService {
      * @throws UserNotFoundException если пользователь не найден
      */
     private void existsUser(Long id) {
-        if (!userRepository.existsById(id)) throw new UserNotFoundException("Пользователь не найден");
+        if (!userRepository.existsById(id)) throw new UserNotFoundException(String.format("Пользователь с id %d не найден", id));
+
     }
+
 
 }

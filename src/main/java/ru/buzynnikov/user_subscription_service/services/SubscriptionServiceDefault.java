@@ -31,7 +31,8 @@ public class SubscriptionServiceDefault implements SubscriptionService {
     @Transactional
     @Override
     public void existsSubscription(Long id) {
-        if (!subscriptionRepository.existsById(id)) throw new SubscriptionNotFoundException("Подписка не найдена");
+        if (!subscriptionRepository.existsById(id)) throw new SubscriptionNotFoundException(String.format( "Подписка c id %d не найдена", id));
+
     }
 
     /**

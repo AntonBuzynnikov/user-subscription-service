@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert_10_sample_users
+      author: Anton Buzynnikov
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "alexander"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "ekaterina"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "dmitry"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "maria"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "sergey"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "anna"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "mikhail"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "olga"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "ivan"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: "natalia"

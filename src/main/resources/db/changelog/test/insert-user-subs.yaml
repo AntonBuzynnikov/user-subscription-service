@@ -1,0 +1,116 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert_user_subscriptions
+      author: Anton Buzynnikov
+      comment: "Add 30 unique user-subscription relationships"
+      changes:
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "1"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "1"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "1"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "2"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "1"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "3"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "1"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "4"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "2"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "1"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "2"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "2"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "2"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "3"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "3"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "1"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "3"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "2"
+        - insert:
+            tableName: user_subscriptions
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  value: "4"
+              - column:
+                  name: subscription_id
+                  type: bigint
+                  value: "1"

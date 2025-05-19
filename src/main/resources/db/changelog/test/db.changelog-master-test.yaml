@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: /db/changelog/changeset/create-user-sub-tables.yaml
+  - include:
+      file: /db/changelog/test/insert-subscriptions.yaml
+  - include:
+      file: /db/changelog/test/insert-users-to-table.yaml
+  - include:
+      file: /db/changelog/test/insert-user-subs.yaml

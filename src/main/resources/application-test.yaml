@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:wallet_db}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:1}
+    driver-class-name: ${DB_DRIVER_CLASS_NAME:org.h2.Driver}
+  liquibase:
+    change-log: classpath:db/changelog/test/db.changelog-master-test.yaml
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
