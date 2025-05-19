@@ -1,8 +1,6 @@
 package ru.buzynnikov.user_subscription_service.aspect;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -16,12 +14,24 @@ import ru.buzynnikov.user_subscription_service.exceptions.SubscriptionNotFoundEx
 import ru.buzynnikov.user_subscription_service.exceptions.UserNotFoundException;
 
 
+/**
+ * Аспект класса, реализующий логгирование различных аспектов поведения сервиса:
+ * обработку исключений, создание новых пользователей, обновление существующих пользователей и подписок.
+ */
 @Aspect
 @Component
 public class LoggingAspect {
 
     private final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
+    /**
+     * Обертка вокруг аннотаций с пометкой @ErrorLog, позволяющая регистрировать возникающие исключения
+     * и записывать их в журнал ошибок. Поддерживает логгирование нескольких типов исключений, включая
+     * нарушение целостности данных, отсутствие пользователя или подписки, ошибки валидации и др.
+     *
+     * @param joinPoint точка соединения (метод, отмеченный аннотацией @ErrorLog)
+     * @throws Throwable если произошла ошибка при выполнении метода
+     */
     @Around("@annotation(ErrorLog)")
     public Object exceptionLogger(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -52,6 +62,13 @@ public class LoggingAspect {
         return joinPoint.proceed();
     }
 
+    /**
+     * Обертка вокруг аннотаций с пометкой @UpdateLog, предназначенная для регистрации изменений в сервисах,
+     * таких как обновление пользователя или удаление подписки.
+     *
+     * @param joinPoint точка соединения (метод, отмеченный аннотацией @UpdateLog)
+     * @throws Throwable если произошла ошибка при выполнении метода
+     */
     @Around("@annotation(UpdateLog)")
     public Object updateLogger(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
@@ -74,6 +91,12 @@ public class LoggingAspect {
         return joinPoint.proceed();
     }
 
+    /**
+     * Обертка вокруг аннотаций с пометкой @CreateLog, предназначена для регистрации моментов создания нового пользователя.
+     *
+     * @param joinPoint точка соединения (метод, отмеченный аннотацией @CreateLog)
+     * @throws Throwable если произошла ошибка при выполнении метода
+     */
     @Around("@annotation(CreateLog)")
     public Object createLogger(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed();

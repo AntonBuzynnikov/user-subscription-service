@@ -59,11 +59,23 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(ex.getMessage()));
     }
 
+    /**
+     * Метод-обработчик исключения типа {@link MethodArgumentNotValidException}. Возникает, когда проверка валидности переданных аргументов метода завершилась неудачей.
+     *
+     * @param ex экземпляр исключения проверки аргументов
+     * @return HTTP-ответ с кодом BAD REQUEST (400), содержащий сообщение о первой ошибке валидации
+     */
     @ErrorLog
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(ex.getBindingResult().getAllErrors().get(0).getDefaultMessage()));
     }
+    /**
+     * Метод-обработчик исключения типа {@link HttpMessageNotReadableException}. Происходит, когда сервер не смог прочитать тело запроса (например, неверный JSON).
+     *
+     * @param ex экземпляр исключения чтения тела запроса
+     * @return HTTP-ответ с кодом BAD REQUEST (400), содержащий стандартное сообщение об ошибке
+     */
     @ErrorLog
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(HttpMessageNotReadableException ex) {
